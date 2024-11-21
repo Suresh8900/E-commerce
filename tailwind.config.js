@@ -4,14 +4,34 @@ module.exports = {
   content: [
 
     "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/flowbite/**/*.js"
   
   ],
   theme: {
     extend: {
+      backdropBlur: {
+        xs: '120px',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 300ms ease-in-out',
+        fadeOut: 'fadeOut 300ms ease-in-out',
+      },
       backgroundImage: {
         "get-started-img": "url('./assets/ic_ellipse.png')",
         "footer-texture": "url('/img/footer-texture.png')",
         "bg-phone": "url('./assets/images/hero_endframe__cvklg0xk3w6e_large 2.png')",
+        "bg-plane": "url('./assets/images/bgImage.png')",
+        "bg-clouds": "url('./assets/images/bgImage 2.png')",
       },
       colors: {
         transparent: "transparent",
@@ -20,6 +40,10 @@ module.exports = {
         customPurple: "#A36EBA",
         custome273150: "#273150",
         customBg: "#FDFFEF ",
+        F5F5F5:"#F5F5F5",
+        green00FF66: "#00FF66",
+        DB4444:"#DB4444"
+
       },
       fontSize: {
         custom_h1: [
@@ -246,6 +270,7 @@ module.exports = {
 
   },
   plugins: [
-    require('tailwind-scrollbar-hide')
+    require('tailwind-scrollbar-hide'),
+    require('flowbite/plugin')
   ],
 };
