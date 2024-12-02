@@ -50,7 +50,7 @@ export default function ProductDetails() {
       };
 
      useEffect(() => {
-    const productDetails = async () => {
+     const productDetails = async () => {
       try {
         const user = {}; 
         const producatData = await postApi(`api/get_product_by_id/${id}`);
@@ -75,7 +75,8 @@ export default function ProductDetails() {
     };
   
     productDetails();
-  }, []);
+
+     }, []);
 
 
 
@@ -103,7 +104,7 @@ export default function ProductDetails() {
   return ( productData && (<>
       <div className='flex pb-20 lg:flex-row max-lg:flex-col lg:px-20 max-lg:px-6 mt-20 font-body overflow-hidden'>
         <div className='hidden lg:flex flex-col w-96 items-center overflow-hidden'>
-          <div className='p-4 bg-F5F5F5 rounded m-2'>
+          {/* <div className='p-4 bg-F5F5F5 rounded m-2'>
             <img src={require('../assets/images/image 63.png')} className='w-full max-h-24 object-contain' />
           </div>
           <div className='p-4 bg-F5F5F5 rounded m-2'>
@@ -111,7 +112,7 @@ export default function ProductDetails() {
           </div>
           <div className='p-4 bg-F5F5F5 rounded m-2'>
             <img src={require('../assets/images/image 63.png')} className='w-full max-h-24 object-contain' />
-          </div>
+          </div> */}
           <div className='p-4 bg-F5F5F5 rounded m-2'>
             <img src={productData.sap_image} className='w-full max-h-24 object-contain bg-transparent mix-blend-multiply' />
           </div>

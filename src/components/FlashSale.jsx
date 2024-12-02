@@ -16,19 +16,21 @@ export function FlashSale({ data = [], addToWishList, heading }) {
   const { scrollRef, scrollLeft, scrollRight } = useHorizontalScroll();
 
   const [products, setProducts] = useState([]);
+  const [targetDate, setTargetDate] = useState('');
 
   useEffect(() => {
     if (data) {
       setProducts(data);
+      setTargetDate('2024-11-27T23:59:59');
     }
   }, [data]);
 
   const handleAddToWishList = (product, id) => {
-    console.log("data===============.>>....==.>", data);
+    console.log("data===============>>", data);
     addToWishList(product, id);
   };
 
-  // const toggleFavorite = (id) => {
+  // const toggleFavorite = (id) => {  
   //   setProducts((prevProducts) =>
   //     prevProducts.map((product) =>
   //       product.id === id ? { ...product, wishlist: !product.wishlist } : product
@@ -47,7 +49,7 @@ export function FlashSale({ data = [], addToWishList, heading }) {
         <div className="flex flex-row max-md:flex-col ">
           <p className="text-custom_h6  font-body pr-28">{heading==="topsellingproduct"?"Best Selling Products":"Flash Sales"}</p>
 
-         {heading!="topsellingproduct" && <CountdownTimer targetDate="2024-11-27T23:59:59" />}
+         {targetDate>0 && heading!="topsellingproduct" && <CountdownTimer targetDate={targetDate} />}
         </div>
 
         <div className="invisible md:visible  lg:visible  flex flex-row">
@@ -98,6 +100,7 @@ export function FlashSale({ data = [], addToWishList, heading }) {
           )}
         </div>
       </div>
+
     </div>
   );
 }

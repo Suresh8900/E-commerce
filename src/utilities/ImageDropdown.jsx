@@ -9,7 +9,7 @@ export default function ImageDropdown() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Toggle the dropdown
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -20,7 +20,7 @@ export default function ImageDropdown() {
       const token = JSON.parse(localStorage.getItem("token"));
       console.log("logged out", token);
       if (!token) {
-        console.error("No token found, user is not authenticated");
+         console.error("No token found, user is not authenticated");
         return;
       }
       const logoutUser = await postApi("api/logout", user);
@@ -39,7 +39,7 @@ export default function ImageDropdown() {
       console.error("Error during logout:", err);
     }
   };
-  // Close dropdown when clicking outside
+ 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

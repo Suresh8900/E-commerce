@@ -17,7 +17,7 @@ export function useHorizontalScroll() {
       const onWheel = (e) => {
         if (e.deltaY === 0) return;
         if(isDesktop){
-        e.preventDefault();
+           e.preventDefault();
         }
         el.scrollTo({
           left: el.scrollLeft + e.deltaY,

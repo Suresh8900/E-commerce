@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { postApi } from '../api/apiService';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../utilities/AppContext';
 
 
 export default function Cart() {
@@ -12,22 +13,33 @@ export default function Cart() {
   const [cartData, setCartData] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [quantities, setQuantities] = useState({}); 
-  const [isLoading, setIsLoading] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false); 
+  const { setCartBadgeCount } = useContext(AppContext);
 
   const productDetails = async () => {
+    
     setIsLoading(true); 
     try {
       const producatData = await postApi("api/get_cart");
       if (producatData.success) {
         setCartData(producatData.data);
-  
+
         if (Array.isArray(producatData.data)) {
           const total = producatData.data.reduce((sum, item) => {
             return sum + (item?.product_cart_total ? parseFloat(item.product_cart_total) : 0);
           }, 0);
           setSubtotal(total.toFixed(2));
+          if(producatData.data.length>0){
+            const itemCount = producatData.data.length;
+            console.log("cart:", producatData.data);
+            console.log("Total number of items in the cart:", itemCount);
+            setCartBadgeCount(itemCount);
+          }
+         
+    
+          
         } else {
+          setCartBadgeCount(0);
           console.error("Expected an array but got:", producatData.data);
         }
       } else {
@@ -84,6 +96,7 @@ export default function Cart() {
       if (removeData.success) {
         toast.success(removeData.message);
         await productDetails();
+        
       } else {
         toast.error(removeData.message || "Failed to update cart");
       }
@@ -197,8 +210,8 @@ export default function Cart() {
               <p>${subtotal}</p>
             </div>
 
-            <div className='lg:mx-24'>
-              <CommonBtn label="Proceed to checkout" bgColor="red-600" textColor="white" />
+            <div  className='lg:mx-24'>
+              <CommonBtn label="Proceed to checkout" bgColor="red-600"  clicked={() => navigate('/')} textColor="white" />
             </div>
           </div>
         </div>

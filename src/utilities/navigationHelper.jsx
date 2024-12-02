@@ -11,3 +11,4 @@ export const navigateTo = (path) => {
     console.error('Navigate function is not set.');
   }
 };
+ 

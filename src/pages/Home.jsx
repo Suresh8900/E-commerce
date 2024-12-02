@@ -11,6 +11,7 @@ import ImageDropdown from "../utilities/ImageDropdown";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ByCategory } from "../components/ByCategory";
+import List from "../utilities/List";
 
 const Home = memo(({ searchText }) => {
   const token = localStorage.getItem("token");
@@ -20,10 +21,21 @@ const Home = memo(({ searchText }) => {
   const [byCategoryList, setByCategoryList] = useState(null);
   const [results, setResults] = useState([]);
   const [heading,setHeading] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   function showToast(message) {
     toast.success(message);
   }
-
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   setSelectedFile(file);
+  //   if(file){ 
+  //      setPreview(URL.createObjectURL(file));
+  //   }
+  //   console.log("url of image:========>>>>", selectedFile);
+  
+  // };
+  
   useEffect(() => {
     console.log("searchText", searchText);
     const fetchSearchResults = async () => {
@@ -46,7 +58,7 @@ const Home = memo(({ searchText }) => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const user = {};
+        
         const dashboardData = await postApi("api/dashboard");
 
         if (dashboardData.success) {
@@ -63,7 +75,7 @@ const Home = memo(({ searchText }) => {
         }
       } catch (err) {
         console.error("Error during dashboard data fetch:", err);
-        showToast("An error occurred while fetching dashboard data.");
+        toast.error("An error occurred while fetching dashboard data.");
       }
     };
 
@@ -112,22 +124,27 @@ const Home = memo(({ searchText }) => {
   }
   return (
     <>
+      {/* <input type="file" capture="user" accept="video/*"  onChange={handleFileChange} name="" id="" />
+      {preview && ( <video width="750" height="500" controls >
+      <source src={preview} type="video/mp4"/>
+     </video>)} */}
       <header>{/* <SearchList/> */}</header>
       <main>
         <section>
           <TabCarousel data={categoryList} />
         </section>
         <section>
+       
           {searchText.length === 0 && (
-            <FlashSale data={productList} addToWishList={addToWishList}  heading={heading[1]}/>
+                <FlashSale data={productList} addToWishList={addToWishList}  heading={heading[1]}/>
           )}
-             {searchText.length === 0 && (
-                <ByCategory data={byCategoryList} />
-              )}
-
 
           {searchText.length === 0 && (
-            <FlashSale data={bestSellingList} addToWishList={addToWishList}  heading={heading[0]}/>
+                <ByCategory data={byCategoryList} />
+          )}
+
+          {searchText.length === 0 && (
+                <FlashSale data={bestSellingList} addToWishList={addToWishList}  heading={heading[0]}/>
           )}
 
 
@@ -184,6 +201,7 @@ const Home = memo(({ searchText }) => {
                   </h1>
                 )}
           </div>
+
         </section>
       </main>
     </>
