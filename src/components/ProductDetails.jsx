@@ -11,7 +11,6 @@ export default function ProductDetails() {
     const navigate = useNavigate();
     const { id } = useParams(); 
     const [selectedButton, setSelectedButton] = useState(1);
-    // const sizes =[]
     const [sizes, setSizes] = useState([]);
     const [selectedSize, setSelectedSize] = useState(null); 
     const [quantity, setQuantity] = useState(1); 
@@ -70,7 +69,6 @@ export default function ProductDetails() {
         }
       } catch (err) {
         console.error("Error during producat data fetch:", err);
-        showToast("An error occurred while fetching producat data.");
       }
     };
   

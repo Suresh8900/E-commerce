@@ -1,4 +1,3 @@
-// useHorizontalScroll.js
 import { useRef, useEffect,useState } from "react";
 
 export function useHorizontalScroll() {

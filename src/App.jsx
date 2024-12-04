@@ -16,7 +16,7 @@ import Loader from "./utilities/loader";
 import { setNavigateFunction } from "./utilities/navigationHelper";
 import { AppProvider } from "./utilities/AppContext";
 import BillingDetails from "./pages/BillingDetails";
-
+import NetworkStatus from './utilities/NetworkStatus';
 function App() {
   const [searchText, setSearchText] = useState("");
 
@@ -43,6 +43,8 @@ function App() {
   }
 
   return (
+    <>
+   <NetworkStatus />
     <AppProvider>
       <Router>
         <SetupNavigation />
@@ -64,6 +66,7 @@ function App() {
         </Routes>{" "}
       </Router>{" "}
     </AppProvider>
+    </>
   );
 }
 

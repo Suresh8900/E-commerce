@@ -106,7 +106,7 @@ export default function Cart() {
     }
   };
 
-
+ 
   const increment = async (id, product_id, qty) => {
     const newQuantity = (quantities[id] || qty) + 1; 
     setQuantities((prevQuantities) => ({

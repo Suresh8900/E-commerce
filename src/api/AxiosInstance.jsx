@@ -3,9 +3,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { navigateTo } from '../utilities/navigationHelper';
 
+const API_ENDPOINT = process.env.REACT_APP_API_URL
+console.log(process.env.REACT_APP_API_URL); 
 
 const axiosInstance = axios.create({
-  baseURL: 'http://3.144.131.203/ecommerce-web/public/',
+  baseURL: API_ENDPOINT,
   headers: {
     'Content-Type': 'application/json',
   },
